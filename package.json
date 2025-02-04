@@ -1,0 +1,15 @@
+{
+  "name": "e-commerce-productpage",
+  "version": "1.0.0",
+  "description": "This is a practice project ",
+  "main": "controller.js",
+  "scripts": {
+    "start":"parcel index.html",
+    "build":"parcel build index.html"
+  },
+  "author": "Mir-Hanan",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.3"
+  }
+}
