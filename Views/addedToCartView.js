@@ -16,7 +16,7 @@ _generateMarkup(){
       </div>
       </div>
       <div class="deleteIcon">
-        <img src='${deleteIconimg}' alt="">
+        <img class='deleteImage' src='${deleteIconimg}' alt="">
       </div>
       <div class="checkoutbtn">
        <button>Checkout</button>

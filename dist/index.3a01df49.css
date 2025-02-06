@@ -290,6 +290,75 @@ header {
   display: none;
 }
 
+.fullProductImg {
+  width: 70%;
+  margin: 30px auto;
+  padding: 80px 40px;
+  position: absolute;
+  top: 20px;
+  left: 150px;
+}
+
+.full-images {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.full-images .icon {
+  background-color: var(--primary-paleOrange);
+  z-index: 2;
+  border-radius: 50%;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding: 10px 14px;
+}
+
+.fullPImg {
+  border-radius: 20px;
+  width: 600px;
+  height: 500px;
+}
+
+.full-ImgThumbnails {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 18px;
+  width: 60%;
+  margin-top: 16px;
+  display: flex;
+  position: absolute;
+  left: 20%;
+}
+
+.full-ImgThumbnails img {
+  border-radius: 20px;
+  height: 120px;
+  margin: 0;
+}
+
+.cross {
+  position: absolute;
+  top: 44px;
+  right: 280px;
+}
+
+.cross img {
+  width: 24px;
+}
+
+.blurBackground {
+  opacity: .3;
+}
+
+.cross img:hover {
+  cursor: pointer;
+}
+
 .left ul li a:hover:after {
   content: "";
   background-color: var(--primary-orange);

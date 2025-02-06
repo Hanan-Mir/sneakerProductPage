@@ -24,7 +24,7 @@
 </ul>
 </nav>
 <nav class="right">
-<a href="#"><img class="cart" src="/icon-cart.61127c2a.svg" alt=""></a>
+<a class="cartValue" href="#"><img class="cart" src="/icon-cart.61127c2a.svg" alt=""></a>
 <a class="avatarLink" href="#"><img class="avatar" src="/image-avatar.2984032f.png" alt=""></a>
 </nav>
   </header>
@@ -60,12 +60,12 @@
   <div class="section-container">
 <div class="two-column">
   <div class="col-left">
-<img src="/image-product-1.5bc88435.jpg" alt="">
+<img id="mainImage" src="/image-product-1.5bc88435.jpg" alt="">
 <div class="grid-container">
-  <a href=""><img class="active-img active" src="/image-product-1-thumbnail.bb24ba40.jpg" alt=""></a>
-  <a href=""><img src="/image-product-2-thumbnail.a45ea749.jpg" alt=""></a>
-  <a href=""><img src="/image-product-3-thumbnail.e4acc9e7.jpg" alt=""></a>
-  <a href=""><img src="/image-product-4-thumbnail.705c0966.jpg" alt=""></a>
+  <a href=""><img imgid="1" class="active-img thumbnailImg" src="/image-product-1-thumbnail.bb24ba40.jpg" alt=""></a>
+  <a href=""><img imgid="2" class="thumbnailImg" src="/image-product-2-thumbnail.a45ea749.jpg" alt=""></a>
+  <a href=""><img imgid="3" class="thumbnailImg" src="/image-product-3-thumbnail.e4acc9e7.jpg" alt=""></a>
+  <a href=""><img imgid="4" class="thumbnailImg" src="/image-product-4-thumbnail.705c0966.jpg" alt=""></a>
 </div>
   </div>
   <div class="col-right">
@@ -93,6 +93,22 @@
 </div>
 </div>
   </div>
+  </section>
+  <section class="fullProductImg hidden">
+    <div class="full-images">
+      <img class="icon previous" src="/icon-previous.0cfc650d.svg" alt="">
+      <img class="fullPImg" src="/image-product-1.5bc88435.jpg" alt="">
+      <img class="icon next" src="/icon-next.336f779b.svg" alt="">
+    </div>
+    <div class="full-ImgThumbnails">
+      <img src="/image-product-1-thumbnail.bb24ba40.jpg" alt="">
+      <img src="/image-product-2-thumbnail.a45ea749.jpg" alt="">
+      <img src="/image-product-3-thumbnail.e4acc9e7.jpg" alt="">
+      <img src="/image-product-4-thumbnail.705c0966.jpg" alt="">
+    </div>
+    <div class="cross">
+      <img class="crossEl" src="/icon-close.c72fd08d.svg" alt="">
+    </div>
   </section>
 </body>
 </html>

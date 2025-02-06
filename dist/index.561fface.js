@@ -609,12 +609,23 @@ var _cartIconUpdate = require("./Views/cartIconUpdate");
 var _cartIconUpdateDefault = parcelHelpers.interopDefault(_cartIconUpdate);
 var _deleteItemCart = require("./Views/deleteItemCart");
 var _deleteItemCartDefault = parcelHelpers.interopDefault(_deleteItemCart);
+var _displayImageOnClick = require("./Views/displayImageOnClick");
+var _displayImageOnClickDefault = parcelHelpers.interopDefault(_displayImageOnClick);
+var _fullImageView = require("./Views/fullImageView");
+var _fullImageViewDefault = parcelHelpers.interopDefault(_fullImageView);
+var _slideImagesView = require("./Views/slideImagesView");
+var _slideImagesViewDefault = parcelHelpers.interopDefault(_slideImagesView);
+var _model = require("./model");
 var _view = require("./Views/view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
-var _model = require("./model");
 const addItemToCart = function() {
-    (0, _addedToCartViewDefault.default)._render((0, _addedToCartViewDefault.default)._generateMarkup);
-    itemAddedToCart = true;
+    if ((0, _addQuantityDefault.default)._parentEl.textContent == 0) {
+        alert('Add the quantity first');
+        return;
+    } else {
+        (0, _addedToCartViewDefault.default)._render((0, _addedToCartViewDefault.default)._generateMarkup);
+        itemAddedToCart = true;
+    }
 };
 const viewCartItems = function() {
     (0, _avatarClickViewDefault.default)._parentEl.classList.toggle('hidden');
@@ -627,10 +638,23 @@ const decreaseItems = function() {
     else (0, _addQuantityDefault.default)._parentEl.textContent--;
 };
 const updateValue = function() {
-    (0, _cartIconUpdateDefault.default)._parentEl.textContent = 1;
+    if ((0, _addQuantityDefault.default)._parentEl.textContent == 0) return;
+    else (0, _cartIconUpdateDefault.default)._parentEl.textContent = 1;
 };
-const deleteCartItem = function() {
-    if (0, _model.itemAddedToCart) (0, _deleteItemCartDefault.default)._render((0, _deleteItemCartDefault.default)._generateDeleteMarkUp);
+const deleteCartItem = function(e) {
+    if (e.target.classList.contains('deleteImage')) {
+        (0, _deleteItemCartDefault.default)._render((0, _deleteItemCartDefault.default)._generateMarkup);
+        (0, _cartIconUpdateDefault.default)._parentEl.textContent = 0;
+        return;
+    }
+};
+const fullImage = function() {
+    (0, _fullImageViewDefault.default)._parentEl.classList.add('blurBackground');
+    (0, _fullImageViewDefault.default)._viewFullImgSection.classList.remove('hidden');
+};
+const closeImg = function() {
+    (0, _fullImageViewDefault.default)._parentEl.classList.remove('blurBackground');
+    (0, _fullImageViewDefault.default)._viewFullImgSection.classList.add('hidden');
 };
 let init = function() {
     (0, _addedToCartViewDefault.default).addHandlerRender(addItemToCart);
@@ -638,12 +662,16 @@ let init = function() {
     (0, _addQuantityDefault.default).increaseItemQuantity(increaseItems);
     (0, _subtractQuantityDefault.default).decreaseItemQuantity(decreaseItems);
     (0, _cartIconUpdateDefault.default).updateCartValue(updateValue);
-    console.log((0, _model.itemAddedToCart));
     (0, _deleteItemCartDefault.default).deleteItem(deleteCartItem);
+    (0, _displayImageOnClickDefault.default).addHandlerImageView((0, _model.imageAddress));
+    (0, _displayImageOnClickDefault.default).activeImage();
+    (0, _fullImageViewDefault.default).fullImageView(fullImage);
+    (0, _fullImageViewDefault.default).closeFullImgView(closeImg);
+    (0, _slideImagesViewDefault.default).moveNextSlide();
 };
 init();
 
-},{"./Views/addedToCartView":"ccVy2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Views/view":"2JHy7","./model":"4mRaZ","./Views/avatarClickView":"gEPw4","./Views/addQuantity":"cEnm5","./Views/subtractQuantity":"9nnqP","./Views/cartIconUpdate":"dZTBy","./Views/deleteItemCart":"iZFDW"}],"ccVy2":[function(require,module,exports,__globalThis) {
+},{"./Views/addedToCartView":"ccVy2","./Views/avatarClickView":"gEPw4","./Views/addQuantity":"cEnm5","./Views/subtractQuantity":"9nnqP","./Views/cartIconUpdate":"dZTBy","./Views/deleteItemCart":"iZFDW","./Views/displayImageOnClick":"aomW9","./Views/fullImageView":"d6ilH","./Views/slideImagesView":"9eFt8","./model":"4mRaZ","./Views/view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ccVy2":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
@@ -667,7 +695,7 @@ class addedToCartView extends (0, _viewDefault.default) {
       </div>
       </div>
       <div class="deleteIcon">
-        <img src='${0, _iconDeleteSvgDefault.default}' alt="">
+        <img class='deleteImage' src='${0, _iconDeleteSvgDefault.default}' alt="">
       </div>
       <div class="checkoutbtn">
        <button>Checkout</button>
@@ -679,7 +707,7 @@ class addedToCartView extends (0, _viewDefault.default) {
 }
 exports.default = new addedToCartView();
 
-},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../images/image-product-1-thumbnail.jpg":"ilBwq","url:../images/icon-delete.svg":"c7vCn"}],"2JHy7":[function(require,module,exports,__globalThis) {
+},{"./view":"2JHy7","url:../images/image-product-1-thumbnail.jpg":"ilBwq","url:../images/icon-delete.svg":"c7vCn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2JHy7":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class View {
@@ -693,11 +721,12 @@ class View {
     _render(data) {
         this._data = data;
         let markup = this._generateMarkup();
+        console.log(markup);
         this.clear();
         this._parentEl.insertAdjacentHTML('afterbegin', markup);
     }
     clear() {
-        this._parentEl.innsertHTML = '';
+        this._parentEl.innerHTML = '';
     }
 }
 exports.default = View;
@@ -773,13 +802,7 @@ exports.getOrigin = getOrigin;
 },{}],"c7vCn":[function(require,module,exports,__globalThis) {
 module.exports = require("d80a8518b972ba80").getBundleURL('adFLR') + "icon-delete.0ef01a8b.svg" + "?" + Date.now();
 
-},{"d80a8518b972ba80":"lgJ39"}],"4mRaZ":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "itemAddedToCart", ()=>itemAddedToCart);
-let itemAddedToCart = false;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gEPw4":[function(require,module,exports,__globalThis) {
+},{"d80a8518b972ba80":"lgJ39"}],"gEPw4":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
@@ -841,21 +864,165 @@ parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 class deleteItemCart extends (0, _viewDefault.default) {
-    _item = 'Hanan';
-    _parentEl = document.querySelector('.checkoutbtn');
-    _generateDeleteMarkUp() {
+    _parentEl = document.querySelector('.itemDescription');
+    _generateMarkup() {
         return `<h3>Cart</h3>
     <div class="break"></div>
     <div class="bottom">
     <p>Your cart is empty.</p>`;
     }
     deleteItem(handler) {
-        console.log(this._parentEl);
-        this._parentEl.addEventListener('click', handler);
+        document.addEventListener('click', handler);
     }
 }
 exports.default = new deleteItemCart();
 
-},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aomW9":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class displayImageOnClick extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector('.left-col');
+    _thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    _imageUrl;
+    addHandlerImageView(imgAdd) {
+        this._thumbnailImages.forEach((img)=>{
+            const mainImage = document.querySelector('#mainImage');
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                this._imageUrl = img.getAttribute('imgId');
+                switch(+this._imageUrl){
+                    case 1:
+                        mainImage.src = imgAdd.firstImg;
+                        break;
+                    case 2:
+                        mainImage.src = imgAdd.secondImg;
+                        break;
+                    case 3:
+                        mainImage.src = imgAdd.thirdImg;
+                        break;
+                    case 4:
+                        mainImage.src = imgAdd.fourthImg;
+                        break;
+                }
+            });
+        });
+    }
+    //function for adding active class
+    activeImage() {
+        this._thumbnailImages.forEach((img)=>{
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                const currentActiveEl = document.querySelector('.active-img');
+                currentActiveEl.classList.remove('active-img');
+                e.target.classList.add('active-img');
+            });
+        });
+    }
+}
+exports.default = new displayImageOnClick();
+
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d6ilH":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class FullImageView extends (0, _viewDefault.default) {
+    _onClickImg = document.querySelector('#mainImage');
+    _viewFullImgSection = document.querySelector('.fullProductImg');
+    _crossEl = document.querySelector('.crossEl');
+    _parentEl = document.querySelector('.container');
+    _thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    _imageUrl;
+    fullImageView(handler) {
+        this._onClickImg.addEventListener('click', handler);
+    }
+    closeFullImgView(handler) {
+        this._crossEl.addEventListener('click', handler);
+    }
+    addHandlerImageView(imgAdd) {
+        this._thumbnailImages.forEach((img)=>{
+            const mainImage = document.querySelector('#mainImage');
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                this._imageUrl = img.getAttribute('imgId');
+                switch(+this._imageUrl){
+                    case 1:
+                        mainImage.src = imgAdd.firstImg;
+                        break;
+                    case 2:
+                        mainImage.src = imgAdd.secondImg;
+                        break;
+                    case 3:
+                        mainImage.src = imgAdd.thirdImg;
+                        break;
+                    case 4:
+                        mainImage.src = imgAdd.fourthImg;
+                        break;
+                }
+            });
+        });
+    }
+}
+exports.default = new FullImageView();
+
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9eFt8":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class SildeImages extends (0, _viewDefault.default) {
+    _prevSlide = document.querySelector('.previous');
+    _nextSlide = document.querySelector('.next');
+    _parentEl = document.querySelector('.fullPImg');
+    moveNextSlide(imgAdd) {
+        console.log(this._thumbnailImages);
+        this._nextSlide.addEventListener('click', function(e) {
+            e.preventDefault();
+            _thumbnailImages = document.querySelectorAll('.thumbnailImg');
+            console.log(this._thumbnailImages);
+            _thumbnailImages.forEach((img)=>{
+                if (img.classList.contains('active-img')) alert('yes contains');
+            });
+        });
+    }
+}
+exports.default = new SildeImages();
+
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4mRaZ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "itemAddedToCart", ()=>itemAddedToCart);
+parcelHelpers.export(exports, "imageAddress", ()=>imageAddress);
+var _imageProduct1Jpg = require("url:./images/image-product-1.jpg");
+var _imageProduct1JpgDefault = parcelHelpers.interopDefault(_imageProduct1Jpg);
+var _imageProduct2Jpg = require("url:./images/image-product-2.jpg");
+var _imageProduct2JpgDefault = parcelHelpers.interopDefault(_imageProduct2Jpg);
+var _imageProduct3Jpg = require("url:./images/image-product-3.jpg");
+var _imageProduct3JpgDefault = parcelHelpers.interopDefault(_imageProduct3Jpg);
+var _imageProduct4Jpg = require("url:./images/image-product-4.jpg");
+var _imageProduct4JpgDefault = parcelHelpers.interopDefault(_imageProduct4Jpg);
+let itemAddedToCart = false;
+let imageAddress = {
+    firstImg: (0, _imageProduct1JpgDefault.default),
+    secondImg: (0, _imageProduct2JpgDefault.default),
+    thirdImg: (0, _imageProduct3JpgDefault.default),
+    fourthImg: (0, _imageProduct4JpgDefault.default)
+};
+
+},{"url:./images/image-product-1.jpg":"exyzL","url:./images/image-product-2.jpg":"atyUO","url:./images/image-product-3.jpg":"djhuZ","url:./images/image-product-4.jpg":"7GTzW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"exyzL":[function(require,module,exports,__globalThis) {
+module.exports = require("f96788208b74efcb").getBundleURL('adFLR') + "image-product-1.be2fda11.jpg" + "?" + Date.now();
+
+},{"f96788208b74efcb":"lgJ39"}],"atyUO":[function(require,module,exports,__globalThis) {
+module.exports = require("3d09cf4ee7980ac2").getBundleURL('adFLR') + "image-product-2.fba8d3e7.jpg" + "?" + Date.now();
+
+},{"3d09cf4ee7980ac2":"lgJ39"}],"djhuZ":[function(require,module,exports,__globalThis) {
+module.exports = require("f2646136bd691447").getBundleURL('adFLR') + "image-product-3.3f85bcd6.jpg" + "?" + Date.now();
+
+},{"f2646136bd691447":"lgJ39"}],"7GTzW":[function(require,module,exports,__globalThis) {
+module.exports = require("a636a265b3f5766").getBundleURL('adFLR') + "image-product-4.e1e3e0cc.jpg" + "?" + Date.now();
+
+},{"a636a265b3f5766":"lgJ39"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
 
 //# sourceMappingURL=index.561fface.js.map

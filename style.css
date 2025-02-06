@@ -258,6 +258,68 @@ transition: hover 0.3 ease-in;
 .hidden{
     display: none;
 }
+.fullProductImg{
+    width: 70%;
+    margin: 30px auto;
+    position: absolute;
+    padding: 80px 40px;
+    top: 20px;
+    left: 150px;
+
+}
+.full-images{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+}
+.full-images .icon{
+    margin-left: -16px;
+    margin-right: -16px;
+    background-color: var(--primary-paleOrange);
+    padding: 10px 14px;
+    border-radius: 50%;
+    z-index: 2;
+}
+.fullPImg{
+    width:600px;
+    height: 500px;
+    border-radius: 20px;
+
+}
+ .full-ImgThumbnails{
+    width:60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 18px;
+    margin-top: 16px;
+    position: absolute;
+    left: 20%;
+}
+.full-ImgThumbnails img{
+    border-radius: 20px;
+    height: 120px;
+    margin: 0;
+}
+.cross{
+    position: absolute;
+    top: 44px;
+    right: 280px;
+}
+.cross img{
+    width: 24px;
+}
+.blurBackground{
+    opacity: 30%;
+}
+.cross img:hover{
+    cursor: pointer;
+}
+
 /* Adding hover effects */
 .left ul li a:hover::after{
     content: '';
