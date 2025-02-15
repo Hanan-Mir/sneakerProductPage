@@ -13,15 +13,19 @@ addHandlerImageView(imgAdd){
              switch(+this._imageUrl){
                 case 1:
                 mainImage.src=imgAdd.firstImg;
+                mainImage.setAttribute('imgId','1');
                 break;
                 case 2:
                     mainImage.src=imgAdd.secondImg;
+                    mainImage.setAttribute('imgId','2');
                     break;
                     case 3:
                         mainImage.src=imgAdd.thirdImg;
+                        mainImage.setAttribute('imgId','3');
                         break;
                         case 4:
                             mainImage.src=imgAdd.fourthImg;
+                            mainImage.setAttribute('imgId','4');
                             break;
             }
         })

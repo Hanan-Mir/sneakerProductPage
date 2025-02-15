@@ -1,10 +1,9 @@
 import View from "./view";
 class deleteItemCart extends View{
 
-_parentEl=document.querySelector('.itemDescription');
+_parentEl=document.querySelector('.bottom');
 _generateMarkup(){
-    return `<h3>Cart</h3>
-    <div class="break"></div>
+    return `
     <div class="bottom">
     <p>Your cart is empty.</p>`
 }

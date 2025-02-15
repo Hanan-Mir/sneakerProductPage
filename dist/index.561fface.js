@@ -665,9 +665,11 @@ let init = function() {
     (0, _deleteItemCartDefault.default).deleteItem(deleteCartItem);
     (0, _displayImageOnClickDefault.default).addHandlerImageView((0, _model.imageAddress));
     (0, _displayImageOnClickDefault.default).activeImage();
-    (0, _fullImageViewDefault.default).fullImageView(fullImage);
+    (0, _fullImageViewDefault.default).fullImageView(fullImage, (0, _model.imageAddress));
     (0, _fullImageViewDefault.default).closeFullImgView(closeImg);
-    (0, _slideImagesViewDefault.default).moveNextSlide();
+    (0, _slideImagesViewDefault.default).addHandlerMoveNextSlide((0, _model.imageAddress));
+    (0, _slideImagesViewDefault.default).addHandlerMovePrevSlide((0, _model.imageAddress));
+    (0, _slideImagesViewDefault.default).addHandlerOnThumbnailClick((0, _model.imageAddress));
 };
 init();
 
@@ -684,14 +686,15 @@ class addedToCartView extends (0, _viewDefault.default) {
     view = new (0, _viewDefault.default)();
     _parentEl = document.querySelector('.bottom');
     _generateMarkup() {
+        let quantitylabel = document.getElementById('number');
         return `<div class="pImage"> <img src="${0, _imageProduct1ThumbnailJpgDefault.default}" alt=""></div>
       <div class="pDescription">
         <p>Fall Limited Edition Sneakers</p>
         <div class="paymentamt">
         <label for="" class="price">$125</label>
         <label for="" class="multiply">x</label>
-        <label for="" class="quantity">3</label>
-        <label for="" class="total">$375</label>
+        <label for="" class="quantity">${quantitylabel.textContent}</label>
+        <label for="" class="total">$${125 * quantitylabel.textContent}</label>
       </div>
       </div>
       <div class="deleteIcon">
@@ -723,6 +726,7 @@ class View {
         let markup = this._generateMarkup();
         console.log(markup);
         this.clear();
+        console.log(this._parentEl);
         this._parentEl.insertAdjacentHTML('afterbegin', markup);
     }
     clear() {
@@ -864,10 +868,9 @@ parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 class deleteItemCart extends (0, _viewDefault.default) {
-    _parentEl = document.querySelector('.itemDescription');
+    _parentEl = document.querySelector('.bottom');
     _generateMarkup() {
-        return `<h3>Cart</h3>
-    <div class="break"></div>
+        return `
     <div class="bottom">
     <p>Your cart is empty.</p>`;
     }
@@ -895,15 +898,19 @@ class displayImageOnClick extends (0, _viewDefault.default) {
                 switch(+this._imageUrl){
                     case 1:
                         mainImage.src = imgAdd.firstImg;
+                        mainImage.setAttribute('imgId', '1');
                         break;
                     case 2:
                         mainImage.src = imgAdd.secondImg;
+                        mainImage.setAttribute('imgId', '2');
                         break;
                     case 3:
                         mainImage.src = imgAdd.thirdImg;
+                        mainImage.setAttribute('imgId', '3');
                         break;
                     case 4:
                         mainImage.src = imgAdd.fourthImg;
+                        mainImage.setAttribute('imgId', '4');
                         break;
                 }
             });
@@ -933,35 +940,49 @@ class FullImageView extends (0, _viewDefault.default) {
     _viewFullImgSection = document.querySelector('.fullProductImg');
     _crossEl = document.querySelector('.crossEl');
     _parentEl = document.querySelector('.container');
-    _thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    _fullImg = document.querySelector('.fullPImg');
+    _thumbnailImages = document.querySelectorAll('.thumbnailImg-2');
     _imageUrl;
-    fullImageView(handler) {
-        this._onClickImg.addEventListener('click', handler);
+    fullImageView(handler, imgAdd) {
+        this._onClickImg.addEventListener('click', (e)=>{
+            e.preventDefault();
+            console.log(Array.from(this._thumbnailImages));
+            const thumbnailImgArr = Array.from(this._thumbnailImages);
+            switch(+this._onClickImg.getAttribute('imgid')){
+                case 1:
+                    this._fullImg.src = imgAdd.firstImg;
+                    this._fullImg.setAttribute('imgid', 1);
+                    this.removeActivethumbnail();
+                    thumbnailImgArr[0].classList.add('active-img');
+                    break;
+                case 2:
+                    this._fullImg.src = imgAdd.secondImg;
+                    this._fullImg.setAttribute('imgid', 2);
+                    this.removeActivethumbnail();
+                    thumbnailImgArr[1].classList.add('active-img');
+                    break;
+                case 3:
+                    this._fullImg.src = imgAdd.thirdImg;
+                    this._fullImg.setAttribute('imgid', 3);
+                    this.removeActivethumbnail();
+                    thumbnailImgArr[2].classList.add('active-img');
+                    break;
+                case 4:
+                    this._fullImg.src = imgAdd.fourthImg;
+                    this._fullImg.setAttribute('imgid', 4);
+                    this.removeActivethumbnail();
+                    thumbnailImgArr[3].classList.add('active-img');
+                    break;
+            }
+            handler();
+        });
     }
     closeFullImgView(handler) {
         this._crossEl.addEventListener('click', handler);
     }
-    addHandlerImageView(imgAdd) {
+    removeActivethumbnail() {
         this._thumbnailImages.forEach((img)=>{
-            const mainImage = document.querySelector('#mainImage');
-            img.addEventListener('click', function(e) {
-                e.preventDefault();
-                this._imageUrl = img.getAttribute('imgId');
-                switch(+this._imageUrl){
-                    case 1:
-                        mainImage.src = imgAdd.firstImg;
-                        break;
-                    case 2:
-                        mainImage.src = imgAdd.secondImg;
-                        break;
-                    case 3:
-                        mainImage.src = imgAdd.thirdImg;
-                        break;
-                    case 4:
-                        mainImage.src = imgAdd.fourthImg;
-                        break;
-                }
-            });
+            img.classList.remove('active-img');
         });
     }
 }
@@ -972,25 +993,116 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
+var _fullImageView = require("./fullImageView");
+var _fullImageViewDefault = parcelHelpers.interopDefault(_fullImageView);
 class SildeImages extends (0, _viewDefault.default) {
     _prevSlide = document.querySelector('.previous');
     _nextSlide = document.querySelector('.next');
     _parentEl = document.querySelector('.fullPImg');
-    moveNextSlide(imgAdd) {
-        console.log(this._thumbnailImages);
-        this._nextSlide.addEventListener('click', function(e) {
+    _thumbnailImages = document.querySelectorAll('.thumbnailImg-2');
+    _onClick = false;
+    addHandlerMovePrevSlide(imgAdd) {
+        this._prevSlide.addEventListener('click', (e)=>{
             e.preventDefault();
-            _thumbnailImages = document.querySelectorAll('.thumbnailImg');
-            console.log(this._thumbnailImages);
-            _thumbnailImages.forEach((img)=>{
-                if (img.classList.contains('active-img')) alert('yes contains');
+            const thumbnailImgArr = Array.from(document.querySelectorAll('.thumbnailImg-2'));
+            let currentImg = this._parentEl.getAttribute('imgid');
+            if (currentImg == 1) {
+                this._parentEl.src = imgAdd.fourthImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[3].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 4);
+            }
+            if (currentImg == 2) {
+                this._parentEl.src = imgAdd.firstImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[0].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 1);
+            }
+            if (currentImg == 3) {
+                this._parentEl.src = imgAdd.secondImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[1].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 2);
+            }
+            if (currentImg == 4) {
+                this._parentEl.src = imgAdd.thirdImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[2].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 3);
+            }
+        });
+    }
+    addHandlerMoveNextSlide(imgAdd) {
+        this._nextSlide.addEventListener('click', ()=>{
+            const thumbnailImgArr = Array.from(document.querySelectorAll('.thumbnailImg-2'));
+            let currentImg = this._parentEl.getAttribute('imgid');
+            if (currentImg == 1) {
+                this._parentEl.src = imgAdd.secondImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[1].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 2);
+            }
+            if (currentImg == 2) {
+                this._parentEl.src = imgAdd.thirdImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[2].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 3);
+            }
+            if (currentImg == 3) {
+                this._parentEl.src = imgAdd.fourthImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[3].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 4);
+            }
+            if (currentImg == 4) {
+                this._parentEl.src = imgAdd.firstImg;
+                (0, _fullImageViewDefault.default).removeActivethumbnail();
+                thumbnailImgArr[0].classList.add('active-img');
+                this._parentEl.setAttribute('imgid', 1);
+            }
+        });
+    }
+    _imgUrl;
+    addHandlerOnThumbnailClick(imgAdd) {
+        this._thumbnailImages.forEach((img)=>{
+            img.addEventListener('click', (e)=>{
+                e.preventDefault();
+                this._onClick = true;
+                const thumbnailImgArr = Array.from(document.querySelectorAll('.thumbnailImg-2'));
+                this._imgUrl = img.getAttribute('imgid');
+                switch(+this._imgUrl){
+                    case 1:
+                        this._parentEl.src = imgAdd.firstImg;
+                        (0, _fullImageViewDefault.default).removeActivethumbnail();
+                        thumbnailImgArr[0].classList.add('active-img');
+                        this._parentEl.setAttribute('imgid', 1);
+                        break;
+                    case 2:
+                        this._parentEl.src = imgAdd.secondImg;
+                        (0, _fullImageViewDefault.default).removeActivethumbnail();
+                        thumbnailImgArr[1].classList.add('active-img');
+                        this._parentEl.setAttribute('imgid', 2);
+                        break;
+                    case 3:
+                        this._parentEl.src = imgAdd.thirdImg;
+                        (0, _fullImageViewDefault.default).removeActivethumbnail();
+                        thumbnailImgArr[2].classList.add('active-img');
+                        this._parentEl.setAttribute('imgid', 3);
+                        break;
+                    case 4:
+                        this._parentEl.src = imgAdd.fourthImg;
+                        (0, _fullImageViewDefault.default).removeActivethumbnail();
+                        thumbnailImgArr[3].classList.add('active-img');
+                        this._parentEl.setAttribute('imgid', 4);
+                        break;
+                }
             });
         });
     }
 }
 exports.default = new SildeImages();
 
-},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4mRaZ":[function(require,module,exports,__globalThis) {
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./fullImageView":"d6ilH"}],"4mRaZ":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "itemAddedToCart", ()=>itemAddedToCart);

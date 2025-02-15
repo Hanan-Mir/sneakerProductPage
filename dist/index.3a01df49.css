@@ -198,11 +198,15 @@ header {
 .active-img {
   box-sizing: border-box;
   background-color: var(--neutral-white);
-  opacity: .7;
+  opacity: .85;
   background-clip: padding-box;
   border: 3px solid #ffa500e6;
   width: 100%;
   height: 100%;
+}
+
+.itemsInCart {
+  position: relative;
 }
 
 .itemsInCart label {
@@ -211,8 +215,8 @@ header {
   border-radius: 10px;
   padding: 2px 8px;
   position: absolute;
-  top: 36px;
-  right: 22%;
+  top: -100px;
+  right: 100px;
 }
 
 .itemDescription {
@@ -336,7 +340,9 @@ header {
 }
 
 .full-ImgThumbnails img {
+  box-sizing: border-box;
   border-radius: 20px;
+  width: 90%;
   height: 120px;
   margin: 0;
 }
@@ -357,6 +363,13 @@ header {
 
 .cross img:hover {
   cursor: pointer;
+}
+
+.active-thumbnail {
+  box-sizing: border-box;
+  background-color: #00f;
+  width: 100%;
+  height: 100%;
 }
 
 .left ul li a:hover:after {
@@ -385,5 +398,11 @@ header {
 
 .deleteIcon:hover {
   cursor: pointer;
+}
+
+@media only screen and (width <= 1400px) {
+  .container {
+    width: 80%;
+  }
 }
 /*# sourceMappingURL=index.3a01df49.css.map */

@@ -11,6 +11,7 @@ this._data=data;
 let markup=this._generateMarkup();
 console.log(markup);
 this.clear();
+console.log(this._parentEl);
 this._parentEl.insertAdjacentHTML('afterbegin',markup);
 }
 clear(){

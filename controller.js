@@ -66,8 +66,11 @@ let init=function(){
     deleteItemCart.deleteItem(deleteCartItem);  
     displayImageOnClick.addHandlerImageView(imageAddress);
     displayImageOnClick.activeImage();
-    fullImageView.fullImageView(fullImage);
+    fullImageView.fullImageView(fullImage,imageAddress);
     fullImageView.closeFullImgView(closeImg);
-    slideImagesView.moveNextSlide();
+    slideImagesView.addHandlerMoveNextSlide(imageAddress);
+    slideImagesView.addHandlerMovePrevSlide(imageAddress);
+    slideImagesView.addHandlerOnThumbnailClick(imageAddress);
+    
 }
 init();
