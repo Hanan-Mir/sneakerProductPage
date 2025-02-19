@@ -26,6 +26,10 @@ header {
   position: relative;
 }
 
+.mobile-left {
+  display: none;
+}
+
 .left {
   flex-direction: row;
   align-items: center;
@@ -63,6 +67,7 @@ header {
   flex-direction: row;
   align-items: center;
   display: flex;
+  position: relative;
 }
 
 .right .cart {
@@ -77,6 +82,7 @@ header {
 .container {
   width: 70%;
   margin: 30px auto;
+  position: relative;
 }
 
 .two-column {
@@ -205,18 +211,15 @@ header {
   height: 100%;
 }
 
-.itemsInCart {
-  position: relative;
-}
-
-.itemsInCart label {
+.cartQ {
   background-color: var(--primary-orange);
   color: var(--neutral-white);
+  box-sizing: border-box;
   border-radius: 10px;
   padding: 2px 8px;
   position: absolute;
-  top: -100px;
-  right: 100px;
+  top: 0%;
+  right: 70%;
 }
 
 .itemDescription {
@@ -224,11 +227,11 @@ header {
   opacity: 1;
   z-index: 2;
   border-radius: 20px;
-  width: 25%;
+  width: 35%;
   height: 250px;
   position: absolute;
-  top: 100px;
-  right: 15%;
+  top: 5%;
+  right: 5%;
   box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
 }
 
@@ -299,8 +302,8 @@ header {
   margin: 30px auto;
   padding: 80px 40px;
   position: absolute;
-  top: 20px;
-  left: 150px;
+  top: 10%;
+  left: 10%;
 }
 
 .full-images {
@@ -332,11 +335,11 @@ header {
   justify-content: center;
   align-items: center;
   column-gap: 18px;
-  width: 60%;
+  width: 50%;
   margin-top: 16px;
   display: flex;
   position: absolute;
-  left: 20%;
+  right: 25%;
 }
 
 .full-ImgThumbnails img {
@@ -347,14 +350,15 @@ header {
   margin: 0;
 }
 
-.cross {
+.crossEl {
+  width: 20px;
   position: absolute;
-  top: 44px;
-  right: 280px;
+  top: 5%;
+  right: 27%;
 }
 
 .cross img {
-  width: 24px;
+  width: 20px;
 }
 
 .blurBackground {
@@ -400,9 +404,343 @@ header {
   cursor: pointer;
 }
 
+.phone-layout {
+  display: none;
+}
+
+.navigation-links {
+  background-color: var(--neutral-white);
+  z-index: 2;
+  flex-direction: column;
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  position: absolute;
+  top: 0%;
+}
+
+.navigation-links ul {
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+}
+
+.navigation-links li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+.close {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 20%;
+  margin-left: 40px;
+}
+
+.hide {
+  display: none;
+}
+
 @media only screen and (width <= 1400px) {
   .container {
+    width: 90%;
+  }
+
+  .col-left {
+    width: 40%;
+  }
+
+  .col-right {
+    width: 40%;
+    margin-left: 10%;
+  }
+
+  header {
+    width: 90%;
+  }
+
+  .crossEl {
+    width: 20px;
+    position: absolute;
+    top: 5%;
+    right: 18%;
+  }
+}
+
+@media only screen and (width <= 1200px) {
+  .container {
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  #mainImage {
+    width: 350px;
+  }
+
+  .grid-container {
+    gap: 10px;
     width: 80%;
+  }
+
+  .grid-container img {
+    width: 80px;
+  }
+
+  .col-left {
+    width: 40%;
+  }
+
+  .col-right {
+    width: 60%;
+    margin-top: 60px;
+    margin-left: 10px;
+  }
+
+  .col-right h2:first-of-type {
+    font-size: 16px;
+  }
+
+  .col-right h2:nth-of-type(2) {
+    font-size: 40px;
+  }
+
+  header {
+    width: 90%;
+  }
+
+  .crossEl {
+    width: 20px;
+    position: absolute;
+    top: 5%;
+    right: 15%;
+  }
+}
+
+@media only screen and (width <= 1000px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+
+  .mobile-left {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .logo {
+    margin-left: 10px;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .two-column {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+  }
+
+  .col-left {
+    width: 80%;
+    margin-right: 50px;
+  }
+
+  #mainImage {
+    width: 100%;
+    height: 500px;
+  }
+
+  .grid-container {
+    width: 100%;
+    margin-left: 10px;
+  }
+
+  .grid-container img {
+    width: 90%;
+  }
+
+  .col-right {
+    width: 80%;
+  }
+
+  .itemDescription {
+    width: 50%;
+  }
+
+  .crossEl {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+  }
+}
+
+@media only screen and (width <= 450px) {
+  .avatar {
+    width: 40px;
+    margin-left: 20px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .menu {
+    width: 20px;
+    height: 16px;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0 10px;
+    padding: 10px 5px;
+  }
+
+  .col-left {
+    width: 100%;
+    margin-left: 40px;
+  }
+
+  .two-column {
+    margin: 0;
+  }
+
+  .phone-icons {
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin-left: 1%;
+    display: flex;
+    position: absolute;
+    top: 25%;
+  }
+
+  .phone-layout .phone-mainImg {
+    border-radius: 0;
+    width: 110%;
+    height: 500px;
+    margin: 0;
+  }
+
+  .phone-icons img {
+    background-color: var(--neutral-white);
+    border-radius: 50%;
+    width: 20px;
+    padding: 5px 10px;
+  }
+
+  .section-container, header {
+    width: 100%;
+  }
+
+  .col-right {
+    width: 100%;
+    margin: 0;
+  }
+
+  .add-product {
+    flex-direction: column;
+    display: flex;
+  }
+
+  .addtocart {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-top: 10px;
+    font-weight: bolder;
+  }
+
+  .add-quantity {
+    width: 100%;
+    margin-left: 16px;
+    padding: 24px 30px;
+  }
+
+  .addtocart img {
+    margin-right: 20px;
+  }
+
+  .pricing-info {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+
+  .price-detail h1 {
+    font-size: 40px;
+  }
+
+  .price-detail lable, #product-description {
+    font-size: 20px;
+  }
+
+  .itemDescription {
+    width: 100%;
+    padding: 10px;
+    right: -4%;
+  }
+
+  .pImage img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .navigation-links {
+    background-color: var(--neutral-white);
+    z-index: 2;
+    flex-direction: column;
+    width: 60%;
+    height: 100vh;
+    display: flex;
+    position: absolute;
+    top: 0%;
+  }
+
+  .navigation-links ul {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+  }
+
+  .navigation-links li {
+    margin-bottom: 20px;
+    list-style-type: none;
+  }
+
+  .close {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 20%;
+    margin-left: 40px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .phone-layout {
+    display: block;
+  }
+
+  .veiw {
+    display: none;
   }
 }
 /*# sourceMappingURL=index.3a01df49.css.map */

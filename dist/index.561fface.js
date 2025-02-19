@@ -616,6 +616,8 @@ var _fullImageViewDefault = parcelHelpers.interopDefault(_fullImageView);
 var _slideImagesView = require("./Views/slideImagesView");
 var _slideImagesViewDefault = parcelHelpers.interopDefault(_slideImagesView);
 var _model = require("./model");
+var _mobileView = require("./Views/mobileView");
+var _mobileViewDefault = parcelHelpers.interopDefault(_mobileView);
 var _view = require("./Views/view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 const addItemToCart = function() {
@@ -670,10 +672,12 @@ let init = function() {
     (0, _slideImagesViewDefault.default).addHandlerMoveNextSlide((0, _model.imageAddress));
     (0, _slideImagesViewDefault.default).addHandlerMovePrevSlide((0, _model.imageAddress));
     (0, _slideImagesViewDefault.default).addHandlerOnThumbnailClick((0, _model.imageAddress));
+    (0, _mobileViewDefault.default).onClickHumberg();
+    (0, _mobileViewDefault.default).onClickClose();
 };
 init();
 
-},{"./Views/addedToCartView":"ccVy2","./Views/avatarClickView":"gEPw4","./Views/addQuantity":"cEnm5","./Views/subtractQuantity":"9nnqP","./Views/cartIconUpdate":"dZTBy","./Views/deleteItemCart":"iZFDW","./Views/displayImageOnClick":"aomW9","./Views/fullImageView":"d6ilH","./Views/slideImagesView":"9eFt8","./model":"4mRaZ","./Views/view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ccVy2":[function(require,module,exports,__globalThis) {
+},{"./Views/addedToCartView":"ccVy2","./Views/avatarClickView":"gEPw4","./Views/addQuantity":"cEnm5","./Views/subtractQuantity":"9nnqP","./Views/cartIconUpdate":"dZTBy","./Views/deleteItemCart":"iZFDW","./Views/displayImageOnClick":"aomW9","./Views/fullImageView":"d6ilH","./Views/slideImagesView":"9eFt8","./model":"4mRaZ","./Views/view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Views/mobileView":"dGaGc"}],"ccVy2":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
@@ -1102,7 +1106,7 @@ class SildeImages extends (0, _viewDefault.default) {
 }
 exports.default = new SildeImages();
 
-},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./fullImageView":"d6ilH"}],"4mRaZ":[function(require,module,exports,__globalThis) {
+},{"./view":"2JHy7","./fullImageView":"d6ilH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4mRaZ":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "itemAddedToCart", ()=>itemAddedToCart);
@@ -1135,6 +1139,35 @@ module.exports = require("f2646136bd691447").getBundleURL('adFLR') + "image-prod
 },{"f2646136bd691447":"lgJ39"}],"7GTzW":[function(require,module,exports,__globalThis) {
 module.exports = require("a636a265b3f5766").getBundleURL('adFLR') + "image-product-4.e1e3e0cc.jpg" + "?" + Date.now();
 
-},{"a636a265b3f5766":"lgJ39"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
+},{"a636a265b3f5766":"lgJ39"}],"dGaGc":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class MobileView extends (0, _viewDefault.default) {
+    _menu = document.querySelector('.menu');
+    _sideBar = document.querySelector('.navigation-links');
+    _cross = document.querySelector('.close');
+    _background = document.querySelector('.section-container');
+    onClickHumberg() {
+        this._menu.addEventListener('click', (e)=>{
+            e.preventDefault();
+            this._sideBar.classList.remove('hide');
+            this._background.style.position = 'fixed';
+            this._background.style.opacity = '0.6';
+        });
+    }
+    onClickClose() {
+        this._cross.addEventListener('click', (e)=>{
+            e.preventDefault();
+            this._sideBar.classList.add('hide');
+            this._background.style.position = 'relative';
+            this._background.style.opacity = '1';
+        });
+    }
+}
+exports.default = new MobileView();
+
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
 
 //# sourceMappingURL=index.561fface.js.map

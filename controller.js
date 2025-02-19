@@ -8,6 +8,7 @@ import displayImageOnClick from "./Views/displayImageOnClick";
 import fullImageView from "./Views/fullImageView";
 import slideImagesView from "./Views/slideImagesView";
 import { imageAddress } from "./model";
+import mobileView from "./Views/mobileView";
 import View from "./Views/view";
 import { itemAddedToCart } from "./model";
 const addItemToCart=function(){
@@ -71,6 +72,8 @@ let init=function(){
     slideImagesView.addHandlerMoveNextSlide(imageAddress);
     slideImagesView.addHandlerMovePrevSlide(imageAddress);
     slideImagesView.addHandlerOnThumbnailClick(imageAddress);
+    mobileView.onClickHumberg();
+    mobileView.onClickClose();
     
 }
 init();

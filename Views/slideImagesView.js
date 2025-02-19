@@ -75,6 +75,7 @@ addHandlerOnThumbnailClick(imgAdd){
     this._thumbnailImages.forEach((img)=>{
         img.addEventListener('click',(e)=>{
             e.preventDefault();
+        
             this._onClick=true;
             const thumbnailImgArr=Array.from(document.querySelectorAll('.thumbnailImg-2'));
             this._imgUrl=img.getAttribute('imgid');

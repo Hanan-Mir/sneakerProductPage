@@ -13,7 +13,7 @@
 <body>
   <section class="container">
   <header>
-<nav class="left">
+<nav class="left desktop">
 <img src="/logo.b3ecd760.svg" alt="">
 <ul>
   <li><a href="#">Collections</a></li>
@@ -23,14 +23,30 @@
   <li><a href="#">Contact</a></li>
 </ul>
 </nav>
+<nav class="mobile-left">
+  <img class="menu" src="/icon-menu.a28b6156.svg" alt="">
+  <img class="logo" src="/logo.b3ecd760.svg" alt="">
+  <div class="navigation-links hide">
+    <img class="close" src="/icon-close.c72fd08d.svg" alt="">
+    <ul>
+      <li>Collections</li>
+      <li>Men</li>
+      <li>Women</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+  </nav>
 <nav class="right">
 <a class="cartValue" href="#"><img class="cart" src="/icon-cart.61127c2a.svg" alt=""></a>
 <a class="avatarLink" href="#"><img class="avatar" src="/image-avatar.2984032f.png" alt=""></a>
+<label for="" class="cartQ hide">0</label>
 </nav>
   </header>
+ 
   <div class="itemsInCart">
-    <label for="" class="cartQ">0</label>
-  </div>
+    
+   </div>
   <div class="itemDescription hidden">
     <h3>Cart</h3>
     <div class="break"></div>
@@ -60,8 +76,15 @@
   <div class="section-container">
 <div class="two-column">
   <div class="col-left">
-<img id="mainImage" imgid="1" src="/image-product-1.5bc88435.jpg" alt="">
-<div class="grid-container">
+<img id="mainImage" class="veiw" imgid="1" src="/image-product-1.5bc88435.jpg" alt="">
+<div class="phone-layout ">
+<img class="phone-mainImg " id="mainImage" imgid="1" src="/image-product-1.5bc88435.jpg" alt="">
+<div class="phone-icons hide">
+  <img src="/icon-previous.0cfc650d.svg" class="previousPhone" alt="">
+  <img src="/icon-next.336f779b.svg" class="nextPhone" alt="">
+</div>
+</div>
+<div class="grid-container veiw">
   <a href=""><img imgid="1" class="active-img thumbnailImg" src="/image-product-1-thumbnail.bb24ba40.jpg" alt=""></a>
   <a href=""><img imgid="2" class="thumbnailImg" src="/image-product-2-thumbnail.a45ea749.jpg" alt=""></a>
   <a href=""><img imgid="3" class="thumbnailImg" src="/image-product-3-thumbnail.e4acc9e7.jpg" alt=""></a>
@@ -71,7 +94,7 @@
   <div class="col-right">
 <h2>SNEAKER COMPANY</h2>
 <h2>Fall Limited Edition Sneakers</h2>
-<p>These low-profile sneakers are your perfect casual wear companion.Featuring a durable rubber outer sole,they'll withstand everything the weather can offer.</p>
+<p id="product-description">These low-profile sneakers are your perfect casual wear companion.Featuring a durable rubber outer sole,they'll withstand everything the weather can offer.</p>
 <div class="pricing-info">
   <div class="price-detail">
   <h1>$125.00</h1> 
@@ -100,11 +123,12 @@
       <img class="fullPImg" src="/image-product-1.5bc88435.jpg" alt="">
       <img class="icon next" src="/icon-next.336f779b.svg" alt="">
     </div>
+   
     <div class="full-ImgThumbnails">
       <img imgid="1" class="thumbnailImg-2" src="/image-product-1-thumbnail.bb24ba40.jpg" alt="">
       <img imgid="2" class="thumbnailImg-2" src="/image-product-2-thumbnail.a45ea749.jpg" alt="">
       <img imgid="3" class="thumbnailImg-2" src="/image-product-3-thumbnail.e4acc9e7.jpg" alt="">
-      <img imgid="4" class="thumbnailImg-2" src="/image-product-4-thumbnail.705c0966.jpg" alt="">
+      <img imgid="4" class="thumbnailImg-2" src="/image-product-4-thumbnail.705c0966.jpg" alt="">   
     </div>
     <div class="cross">
       <img class="crossEl" src="/icon-close.c72fd08d.svg" alt="">
