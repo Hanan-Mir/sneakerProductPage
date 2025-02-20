@@ -674,6 +674,8 @@ let init = function() {
     (0, _slideImagesViewDefault.default).addHandlerOnThumbnailClick((0, _model.imageAddress));
     (0, _mobileViewDefault.default).onClickHumberg();
     (0, _mobileViewDefault.default).onClickClose();
+    (0, _mobileViewDefault.default).onMovePrevSlide((0, _model.imageAddress));
+    (0, _mobileViewDefault.default).onMoveNextSlide((0, _model.imageAddress));
 };
 init();
 
@@ -1144,11 +1146,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
+var _slideImagesView = require("./slideImagesView");
+var _slideImagesViewDefault = parcelHelpers.interopDefault(_slideImagesView);
 class MobileView extends (0, _viewDefault.default) {
     _menu = document.querySelector('.menu');
     _sideBar = document.querySelector('.navigation-links');
     _cross = document.querySelector('.close');
     _background = document.querySelector('.section-container');
+    _prevSlide = document.querySelector('.previousPhone');
+    _nextSlide = document.querySelector('.nextPhone');
+    _parentEl = document.querySelector('.phone-mainImg');
     onClickHumberg() {
         this._menu.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -1165,9 +1172,53 @@ class MobileView extends (0, _viewDefault.default) {
             this._background.style.opacity = '1';
         });
     }
+    onMovePrevSlide(imgAdd) {
+        this._prevSlide.addEventListener('click', (e)=>{
+            let currentImg = this._parentEl.getAttribute('imgid');
+            if (currentImg == 1) {
+                this._parentEl.src = imgAdd.fourthImg;
+                this._parentEl.setAttribute('imgid', 4);
+            }
+            if (currentImg == 2) {
+                this._parentEl.src = imgAdd.firstImg;
+                this._parentEl.setAttribute('imgid', 1);
+            }
+            if (currentImg == 3) {
+                this._parentEl.src = imgAdd.secondImg;
+                this._parentEl.setAttribute('imgid', 2);
+            }
+            if (currentImg == 4) {
+                this._parentEl.src = imgAdd.thirdImg;
+                this._parentEl.setAttribute('imgid', 3);
+            }
+        });
+        (0, _slideImagesViewDefault.default).addHandlerMoveNextSlide(imgAdd);
+    }
+    onMoveNextSlide(imgAdd) {
+        this._nextSlide.addEventListener('click', (e)=>{
+            e.preventDefault();
+            let currentImg = this._parentEl.getAttribute('imgid');
+            if (currentImg == 1) {
+                this._parentEl.src = imgAdd.secondImg;
+                this._parentEl.setAttribute('imgid', 2);
+            }
+            if (currentImg == 2) {
+                this._parentEl.src = imgAdd.thirdImg;
+                this._parentEl.setAttribute('imgid', 3);
+            }
+            if (currentImg == 3) {
+                this._parentEl.src = imgAdd.fourthImg;
+                this._parentEl.setAttribute('imgid', 4);
+            }
+            if (currentImg == 4) {
+                this._parentEl.src = imgAdd.firstImg;
+                this._parentEl.setAttribute('imgid', 1);
+            }
+        });
+    }
 }
 exports.default = new MobileView();
 
-},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
+},{"./view":"2JHy7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./slideImagesView":"9eFt8"}]},["cYdHD","a2PJv"], "a2PJv", "parcelRequire94c2")
 
 //# sourceMappingURL=index.561fface.js.map

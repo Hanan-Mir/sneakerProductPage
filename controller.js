@@ -74,6 +74,8 @@ let init=function(){
     slideImagesView.addHandlerOnThumbnailClick(imageAddress);
     mobileView.onClickHumberg();
     mobileView.onClickClose();
+    mobileView.onMovePrevSlide(imageAddress);
+    mobileView.onMoveNextSlide(imageAddress);
     
 }
 init();
