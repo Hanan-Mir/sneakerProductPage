@@ -10,7 +10,6 @@ import slideImagesView from "./Views/slideImagesView";
 import { imageAddress } from "./model";
 import mobileView from "./Views/mobileView";
 import View from "./Views/view";
-import { itemAddedToCart } from "./model";
 const addItemToCart=function(){
     if(addQuantity._parentEl.textContent==0){
         alert('Add the quantity first');
@@ -18,7 +17,6 @@ const addItemToCart=function(){
     }
     else{
 addedToCartView._render(addedToCartView._generateMarkup);
-itemAddedToCart=true;
 }
 }
 const viewCartItems=function(){

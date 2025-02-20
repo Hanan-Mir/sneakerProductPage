@@ -624,10 +624,7 @@ const addItemToCart = function() {
     if ((0, _addQuantityDefault.default)._parentEl.textContent == 0) {
         alert('Add the quantity first');
         return;
-    } else {
-        (0, _addedToCartViewDefault.default)._render((0, _addedToCartViewDefault.default)._generateMarkup);
-        itemAddedToCart = true;
-    }
+    } else (0, _addedToCartViewDefault.default)._render((0, _addedToCartViewDefault.default)._generateMarkup);
 };
 const viewCartItems = function() {
     (0, _avatarClickViewDefault.default)._parentEl.classList.toggle('hidden');
@@ -1111,7 +1108,6 @@ exports.default = new SildeImages();
 },{"./view":"2JHy7","./fullImageView":"d6ilH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4mRaZ":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "itemAddedToCart", ()=>itemAddedToCart);
 parcelHelpers.export(exports, "imageAddress", ()=>imageAddress);
 var _imageProduct1Jpg = require("url:./images/image-product-1.jpg");
 var _imageProduct1JpgDefault = parcelHelpers.interopDefault(_imageProduct1Jpg);
@@ -1121,7 +1117,6 @@ var _imageProduct3Jpg = require("url:./images/image-product-3.jpg");
 var _imageProduct3JpgDefault = parcelHelpers.interopDefault(_imageProduct3Jpg);
 var _imageProduct4Jpg = require("url:./images/image-product-4.jpg");
 var _imageProduct4JpgDefault = parcelHelpers.interopDefault(_imageProduct4Jpg);
-let itemAddedToCart = false;
 let imageAddress = {
     firstImg: (0, _imageProduct1JpgDefault.default),
     secondImg: (0, _imageProduct2JpgDefault.default),
